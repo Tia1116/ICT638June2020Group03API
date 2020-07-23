@@ -19,7 +19,7 @@ namespace ICT638June2020Group03API
         {
             Configuration = configuration;
         }
-
+        //Tia 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
