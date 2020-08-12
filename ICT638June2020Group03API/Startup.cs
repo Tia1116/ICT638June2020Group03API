@@ -33,6 +33,9 @@ namespace ICT638June2020Group03API
             services.AddDbContext<UserContext>(opt =>
                opt.UseInMemoryDatabase("UserList"));
 
+            services.AddDbContext<HouseContext>(opt =>
+               opt.UseInMemoryDatabase("HouseList"));
+
             services.AddControllers();
         }
 
