@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ICT638June2020Group03API.models;
 
 
@@ -15,20 +16,56 @@ namespace ICT638June2020Group03API.Controllers
     public class HouseController : ControllerBase
     {
         private readonly HouseContext _context;
+        private List<House> hourseTestList = new List<House>();
 
         public HouseController(HouseContext context)
         {
             _context = context;
+
+
+
+            for (int i=0; i < 100; i++)
+            {
+                House house = new House();
+                house.Address = "city2001" + i;
+                house.id = i;
+                house.bedroomnumber = i + 1 + "";
+                house.bathroomnumber = i + 3 + "";
+                house.rent = i * 100 + 100;
+                hourseTestList.Add(house);
+
+            }
         }
 
-        // GET: api/Agents
+        // GET: api/Houses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<House>>> GetTodoItems()
+        public async Task<ActionResult<IEnumerable<House>>> GetAllHouse()
         {
-            return await _context.TodoItems.ToListAsync();
+            //  return await _context.TodoItems.ToListAsync();
+
+
+
+            return hourseTestList;
+
         }
 
-        // GET: api/Agents/5
+        [HttpGet("{rent}")]
+        public async Task<ActionResult<House>> GetHouseByRent(float rent)
+        {
+            House result = null;
+
+            foreach (House tempHouse in hourseTestList)
+            {
+
+                if (rent == tempHouse.rent)
+                {
+                    result = tempHouse;
+                }
+            }
+            return result;
+        }
+
+        // GET: api/Houses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<House>> GetHouse(int id)
         {
@@ -42,11 +79,11 @@ namespace ICT638June2020Group03API.Controllers
             return house;
         }
 
-        // PUT: api/Agents/5
+        // PUT: api/Houses/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAgent(int id, House house)
+        public async Task<IActionResult> PutHouse(int id, House house)
         {
             if (id != house.id)
             {
@@ -74,19 +111,19 @@ namespace ICT638June2020Group03API.Controllers
             return NoContent();
         }
 
-        // POST: api/Agents
+        // POST: api/Houses
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Agent>> PostAgent(House house)
+        public async Task<ActionResult<House>> PostAgent(House house)
         {
             _context.TodoItems.Add(house);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAgent", new { id = house.id }, house);
+            return CreatedAtAction("GetHouse", new { id = house.id }, house);
         }
 
-        // DELETE: api/Agents/5
+        // DELETE: api/Houses/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<House>> DeleteAgent(int id)
         {

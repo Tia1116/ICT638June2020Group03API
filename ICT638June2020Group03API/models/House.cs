@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace ICT638June2020Group03API.models
 {
-    //Agent Api Tia
+ 
     public class House
     {
 
         public int id { get; set; }
-        public string rent { get; set; }
+        public float rent { get; set; }
 
         public string bedroomnumber { get; set; }
 

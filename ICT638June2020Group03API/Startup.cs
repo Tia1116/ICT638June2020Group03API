@@ -27,11 +27,7 @@ namespace ICT638June2020Group03API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<agent_context>(opt =>
-               opt.UseInMemoryDatabase("AgentList"));
-            
-            services.AddDbContext<UserContext>(opt =>
-               opt.UseInMemoryDatabase("UserList"));
+
 
             services.AddDbContext<HouseContext>(opt =>
                opt.UseInMemoryDatabase("HouseList"));
