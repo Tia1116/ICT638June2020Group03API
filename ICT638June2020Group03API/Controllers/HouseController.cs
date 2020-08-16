@@ -13,6 +13,7 @@ namespace ICT638June2020Group03API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class HouseController : ControllerBase
     {
         private readonly HouseContext _context;
@@ -123,7 +124,7 @@ namespace ICT638June2020Group03API.Controllers
             return CreatedAtAction("GetHouse", new { id = house.id }, house);
         }
 
-        // DELETE: api/Houses/5
+        // DELETE: api/Houses/5  yifan
         [HttpDelete("{id}")]
         public async Task<ActionResult<House>> DeleteAgent(int id)
         {
